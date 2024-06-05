@@ -5,20 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TODO_Liste"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ToDos-Liste" Height="450" Width="800">
+    <Window.DataContext>
+        <local:ToDos />
+    </Window.DataContext>
     <Grid Background="#FFD7D2D2">
         <DockPanel LastChildFill="True">
-            <Border Width="200" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+            <Border Width="267" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
                 <DockPanel LastChildFill="False">
-                    <TextBlock Foreground="Black" DockPanel.Dock="Top">Top Content</TextBlock>
-                    <Border BorderBrush="Black"  Height="50" BorderThickness="1" DockPanel.Dock="Bottom">
-                        <TextBlock>Bottom Content</TextBlock>
+                    <Border BorderBrush="Black" Height="50" BorderThickness="1" DockPanel.Dock="Bottom">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox TextWrapping="Wrap" Margin="5" Background="#FFADADAD"/>
+                            <Button Content="-" HorizontalAlignment="Left" Grid.Column="1" Width="43" Margin="10,5,0,5"/>
+
+                        </Grid>
                     </Border>
+                    <ListBox Width="267" ItemsSource="{Binding Taskliste}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Description}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Details}" />
+                                    <TextBlock Text="{Binding DueDate, StringFormat=d}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1">
                 <TextBlock Foreground="Black">Right</TextBlock>
             </Border>
         </DockPanel>
+
     </Grid>
 </Window>
