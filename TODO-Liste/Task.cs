@@ -48,6 +48,13 @@ namespace TODO_Liste
             ID_SERVER += 10;
         }
 
+        public Task()
+        {
+            ID = ID_SERVER;
+            ID_SERVER += 10;
+        }
+
+
 
         /// <summary>
         /// 

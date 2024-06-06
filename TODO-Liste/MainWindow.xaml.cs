@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,12 +9,14 @@ namespace TODO_Liste
     {
         private double originalWidth;
         private double originalHeight;
+        private ToDos todos;
 
         public MainWindow()
         {
             InitializeComponent();
             originalWidth = this.Width;
             originalHeight = this.Height;
+            todos = (ToDos)this.DataContext;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -25,18 +28,20 @@ namespace TODO_Liste
 
         private void lstTasks_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Überprüfen, ob ein Listenelement ausgewählt wurde
             if (lstTasks.SelectedItem != null)
             {
-                // Zuweisung des ausgewählten Listenelements an eine Instanz der Klasse "Task"
                 Task selectedTask = (Task)lstTasks.SelectedItem;
-
-                // Setzen der Werte der ausgewählten Aufgabe in die entsprechenden Felder
-                txtDescription.Text = selectedTask.Description;
-                txtNewDescription.Text = selectedTask.Description;
-                txtNewDetails.Text = selectedTask.Details;
-                dpNewDueDate.SelectedDate = selectedTask.DueDate;
+                SetTaskDetails(selectedTask);
             }
+        }
+
+        private void SetTaskDetails(Task task)
+        {
+            txtDescription.Text = task.Description;
+            txtNewDescription.Text = task.Description;
+            txtNewDetails.Text = task.Details;
+            dpNewDueDate.SelectedDate = task.DueDate;
+            lblTaskId.Content = task.ID.ToString();
         }
 
         private void btnToggle_Click(object sender, RoutedEventArgs e)
@@ -63,8 +68,41 @@ namespace TODO_Liste
                 selectedTask.Description = txtNewDescription.Text;
                 selectedTask.Details = txtNewDetails.Text;
                 selectedTask.DueDate = dpNewDueDate.SelectedDate ?? selectedTask.DueDate;
+            }
+            else
+            {
+                Task newTask = new Task
+                {
+                    Description = txtNewDescription.Text,
+                    Details = txtNewDetails.Text,
+                    DueDate = dpNewDueDate.SelectedDate ?? DateTime.Now
+                };
+                todos.Taskliste.Add(newTask);
+            }
 
-                lstTasks.Items.Refresh(); // Refresh the ListBox to show updated data
+            lstTasks.Items.Refresh(); // Refresh the ListBox to show updated data
+            ClearTaskDetails();
+        }
+
+        private void ClearTaskDetails()
+        {
+            lblTaskId.Content = lstTasks.SelectedItem != null ? ((Task)lstTasks.SelectedItem).ID.ToString() : "new";
+            txtNewDescription.Text = string.Empty;
+            txtNewDetails.Text = string.Empty;
+            dpNewDueDate.SelectedDate = null;
+        }
+
+        private void lstTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstTasks.SelectedItem != null)
+            {
+                Task selectedTask = (Task)lstTasks.SelectedItem;
+                SetTaskDetails(selectedTask);
+            }
+            else
+            {
+                lblTaskId.Content = "new"; // Wenn kein Element ausgewählt ist, setzen wir "new" als ID
+                ClearTaskDetails();
             }
         }
     }
