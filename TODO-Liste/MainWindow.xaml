@@ -19,15 +19,16 @@
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox TextWrapping="Wrap" Margin="5" Background="#FFADADAD"/>
+                            <TextBox x:Name="txtDescription" TextWrapping="Wrap" Margin="5" Background="#FFADADAD"/>
                             <Button Content="-" HorizontalAlignment="Left" Grid.Column="1" Width="43" Margin="10,5,0,5"/>
 
                         </Grid>
                     </Border>
-                    <ListBox Width="267" ItemsSource="{Binding Taskliste}">
+                    <ListBox x:Name="lstTasks" Width="267" ItemsSource="{Binding Taskliste}" MouseDoubleClick="lstTasks_MouseDoubleClick">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
+                                    <TextBlock Text="{Binding Id}" Visibility="Collapsed"/>
                                     <TextBlock Text="{Binding Description}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Details}" />
                                     <TextBlock Text="{Binding DueDate, StringFormat=d}" />
@@ -59,10 +60,10 @@
                     <Label Grid.Row="4" Grid.Column="0" Content="Due Date" HorizontalContentAlignment="Right" FontWeight="Bold" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
 
                     <Label Grid.Row="0" Grid.Column="1" Content="new" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,0,0,0"/>
-                    <TextBox TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5"/>
-                    <TextBox TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5" Grid.RowSpan="2"/>
-                    <DatePicker Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="0,0,5,0" HorizontalAlignment="Right"  Width="236"/>
-                    <Button Grid.Column="1" Content="Save" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Height="60" Width="236" Margin="14,0,0,0"/>
+                    <TextBox x:Name="txtNewDescription" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5"/>
+                    <TextBox x:Name="txtNewDetails" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5" Grid.RowSpan="2"/>
+                    <DatePicker x:Name="dpNewDueDate" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="24,0,0,0" HorizontalAlignment="Left"  Width="220"/>
+                    <Button Content="Save" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Height="60" Width="220" Margin="24,0,0,0"/>
 
                 </Grid>
 

@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TODO_Liste
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void lstTasks_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Überprüfen, ob ein Listenelement ausgewählt wurde
+            if (lstTasks.SelectedItem != null)
+            {
+                // Zuweisung des ausgewählten Listenelements an eine Instanz der Klasse "Task"
+                Task selectedTask = (Task)lstTasks.SelectedItem;
+
+                // Setzen der Werte der ausgewählten Aufgabe in die entsprechenden Felder
+                txtDescription.Text = selectedTask.Description;
+                txtNewDescription.Text = selectedTask.Description;
+                txtNewDetails.Text = selectedTask.Details;
+                dpNewDueDate.SelectedDate = selectedTask.DueDate;
+            }
         }
 
     }
