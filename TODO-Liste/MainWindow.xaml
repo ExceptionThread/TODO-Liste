@@ -38,7 +38,34 @@
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1">
-                <TextBlock Foreground="Black">Right</TextBlock>
+                <Grid Margin="0,0,20,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="ID" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Description" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Details" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Due Date" HorizontalContentAlignment="Right" FontWeight="Bold" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+
+                    <Label Grid.Row="0" Grid.Column="1" Content="new" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,0,0,0"/>
+                    <TextBox TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5"/>
+                    <TextBox TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" FontWeight="Bold" Margin="25,5,5,5" Grid.RowSpan="2"/>
+                    <DatePicker Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="0,0,5,0" HorizontalAlignment="Right"  Width="236"/>
+                    <Button Grid.Column="1" Content="Save" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center" Height="60" Width="236" Margin="14,0,0,0"/>
+
+                </Grid>
+
             </Border>
         </DockPanel>
 
